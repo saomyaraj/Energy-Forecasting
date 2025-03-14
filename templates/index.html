@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Energy Consumption Prediction</h1>
+            <p>Predict energy consumption based on weather data and temporal features</p>
+        </header>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2>Input Data</h2>
+                <form id="prediction-form">
+                    <div class="form-group">
+                        <label for="start-date">Prediction Start Date:</label>
+                        <input type="datetime-local" id="start-date" name="start_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="forecast-length">Forecast Length (hours):</label>
+                        <select id="forecast-length" name="forecast_length">
+                            <option value="3">3 hours</option>
+                            <option value="6">6 hours</option>
+                            <option value="12">12 hours</option>
+                            <option value="24" selected>24 hours</option>
+                            <option value="48">48 hours</option>
+                        </select>
+                    </div>
+                    
+                    <div class="historical-data">
+                        <h3>Historical Data (Last 24 Hours)</h3>
+                        <p>Enter weather data for the past 24 hours</p>
+                        
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Hour</th>
+                                        <th>Temperature</th>
+                                        <th>Humidity (%)</th>
+                                        <th>Wind Speed</th>
+                                        <th>Precipitation</th>
+                                        <th>Weekend/Holiday</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historical-data-inputs">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" id="fill-dummy-data">Fill with Example Data</button>
+                            <button type="submit">Predict Energy Consumption</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="results-section" id="results-section">
+                <h2>Prediction Results</h2>
+                <div class="loader" id="loader">Loading...</div>
+                <div class="chart-container">
+                    <canvas id="prediction-chart"></canvas>
+                </div>
+                <div class="data-table">
+                    <table id="prediction-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Predicted Energy Consumption (MW)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prediction-results">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
